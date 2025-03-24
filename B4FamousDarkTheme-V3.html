@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B4Famous – About</title>
+  <style>
+    /* Basic Reset & Fonts */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif; /* Modern, slightly rounded sans-serif */
+      line-height: 1.6;
+      background-color: #121212; /* Dark background */
+      color: #eee; /* Light text for contrast */
+    }
+
+    /* Overall Layout */
+    header, nav, main, section, footer {
+      width: 100%;
+      padding: 0 2rem; /* Keep horizontal padding */
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem; /* Consistent padding */
+      background-color: rgba(25, 25, 25, 0.9); /* Slightly lighter dark, with transparency */
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 70px;
+      margin-right: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.1);
+    }
+    .logo-title {
+      font-family: 'Montserrat', sans-serif; /* Bold, modern sans-serif */
+      font-size: 2.2rem;
+      color: #9c27b0; /* Deep Purple */
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Navigation */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin-left: auto; /* Keep items pushed to the right */
+      flex-wrap: nowrap; /* We'll handle wrapping in media query */
+    }
+    nav li {
+      margin-bottom: 0; /* default */
+    }
+    nav a {
+      text-decoration: none;
+      color: #bbb; /* Lighter gray for inactive links */
+      font-weight: 500; /* Slightly less bold */
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); /* Animated gradient */
+      background-size: 400%;
+      transition: width 0.4s ease;
+      z-index: -1;
+      animation: glowing-border 8s linear infinite; /* Add the animation */
+    }
+    nav a:hover {
+      color: #fff; /* White on hover */
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    nav a:hover::before {
+      width: 100%;
+    }
+
+    /* Keyframes for the animated glowing border */
+    @keyframes glowing-border {
+      0%   { background-position: 0 0; }
+      50%  { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center/cover;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+      z-index: 1;
+    }
+    .hero > * {
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      line-height: 1.2;
+      color: #fff; /* White text */
+    }
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      color: #eee; /* Light gray */
+    }
+    .hero .cta-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #03a9f4, #f441a5); /* Gradient button */
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+    .hero .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+      filter: brightness(1.1);
+    }
+
+    /* About Section */
+    .about {
+      background-color: rgba(35, 35, 35, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 4rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-bottom: 4rem; /* spacing from the hero and next section */
+    }
+    .about h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #9c27b0;
+    }
+    .about p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Artists Section */
+    .artists {
+      margin: 4rem auto;
+      max-width: 1200px;
+      padding: 0 2rem;
+    }
+    .artists h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      color: #9c27b0;
+    }
+    .artist-grid {
+      display: grid;
+      /* Reducing the min-width to help alignment and reduce large gaps */
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .artist-card {
+      background-color: rgba(45, 45, 45, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .artist-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    }
+    .artist-card img {
+      width: 100%;
+      height: 250px; /* Fixed height for uniformity */
+      object-fit: cover;
+    }
+    .artist-card .artist-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .artist-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+    }
+    .artist-card p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #ccc;
+      flex-grow: 1;
+    }
+    .artist-card a {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(90deg, #03a9f4, #f441a5);
+      font-weight: 600;
+      margin-top: auto;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, filter 0.3s ease;
+      align-self: flex-start;
+    }
+    .artist-card a:hover {
+      filter: brightness(1.2);
+      text-decoration: none;
+    }
+
+    /* Join Section */
+    .join {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #9c27b0, #673ab7);
+      border-radius: 0;
+      margin-bottom: 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    .join h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+    }
+    .join p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: #eee;
+    }
+    .join .join-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #fff;
+      color: #9c27b0;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .join .join-btn:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+      color: #673ab7;
+    }
+
+    /* Contact Section */
+    #contact {
+      text-align: center;
+      margin-bottom: 0;
+      padding: 4rem 2rem;
+      background-color: rgba(35, 35, 35, 0.8);
+      border-radius: 0;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+    }
+    #contact h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #9c27b0;
+    }
+    #contact p {
+      margin-bottom: 0.8rem;
+      color: #ccc;
+    }
+    #contact a {
+      color: #03a9f4;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    #contact a:hover {
+      text-decoration: underline;
+      color: #f441a5;
+    }
+    #contact .social-icons {
+      margin-top: 1.5rem;
+    }
+    .social-icons a {
+      display: inline-block;
+      margin: 0 0.75rem;
+      font-size: 1.5rem;
+      color: #777;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #9c27b0;
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      background-color: rgba(25, 25, 25, 0.9);
+      color: #999;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #03a9f4;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 600;
+    }
+    footer a:hover {
+      text-decoration: underline;
+      color: #f441a5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      /* Wrap the nav items to ensure they remain visible */
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      nav li {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .logo img {
+        height: 50px;
+      }
+      .logo-title {
+        font-size: 1.8rem;
+      }
+      header, nav, main, section, footer {
+        padding: 0 1rem;
+      }
+      .about, .artists {
+        padding: 2rem 1rem;
+        margin: 0 auto;
+      }
+      .artist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 4rem 1rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .artist-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://imaginebc.net/wp-content/uploads/2025/02/B4Famous-Logo.png" alt="B4Famous Logo">
+      <span class="logo-title">B4Famous</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#artists">Artists</a></li>
+        <li><a href="#join">Join</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Music That Connects <br>Before the World Catches On</h1>
+    <p>Join us in celebrating independent artists and authentic storytelling through music.</p>
+    <a href="#join" class="cta-btn">Join Our Community</a>
+  </section>
+
+  <main>
+    <!-- About Section -->
+    <section class="about" id="about">
+      <h2>About B4Famous</h2>
+      <p>
+        B4Famous is a passionate collective of independent songwriters dedicated to promoting emerging
+        musicians and artists through ImagineBC. United by a shared love for storytelling through music,
+        we aim to amplify voices, foster creativity, and create meaningful connections between artists
+        and audiences. Our members bring unique styles, backgrounds, and experiences, but together, we
+        share one goal: to make music that resonates before fame finds us.
+      </p>
+    </section>
+
+    <!-- Artists Section -->
+    <section class="artists" id="artists">
+      <h2>Meet Some of Our Artists</h2>
+      <div class="artist-grid">
+        <!-- JudyAnne Jackson -->
+        <div class="artist-card">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/5ffe1bc8c3f2a54f4ff61cbe/1c2a65e6-d5c7-4b4c-b5de-9ad21f5d9d53/jajax+web+banner.jpg?format=2500w"
+            alt="JudyAnne Jackson"
+          />
+          <div class="artist-info">
+            <h3>JudyAnne Jackson</h3>
+            <p>
+              With a voice that echoes timeless soul and lyrics that speak to the heart,
+              Florida-based singer-songwriter JudyAnne has captivated audiences nationwide.
+              A finalist on NBC’s Today Show and a PBS Celebration of Music awardee, she
+              has performed at historic venues like The Bitter End in NYC. Her EPs <em>Old Soul</em>
+              and <em>Dear Me</em> showcase her passionate storytelling and undeniable vocal talent.
+            </p>
+            <a href="https://www.judyannejackson.com/" target="_blank">Visit Her Page</a>
+          </div>
+        </div>
+
+        <!-- Kyle Shaw -->
+        <div class="artist-card">
+          <img
+            src="https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/648230/d672e3af01e2add6f7f77540201af450c880ea6d/original/ae7aa3b2-0bab-4988-834c-e97ae3abde25.jpeg/!!/b%3AW1sicmVzaXplIiwxMzY1XSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+            alt="Kyle Shaw"
+          />
+          <div class="artist-info">
+            <h3>Kyle Shaw</h3>
+            <p>
+              A storyteller at heart, Kyle left the corporate world to pursue music full-time.
+              His 2023 self-titled debut album introduced his soulful voice and heartfelt lyrics
+              to the Tampa Bay scene. With a second album on the way, Kyle continues to craft
+              songs that move, inspire, and leave a lasting impression.
+            </p>
+            <a href="https://kyleshawmusic.com/music" target="_blank">Visit His Page</a>
+          </div>
+        </div>
+
+        <!-- CoAnn -->
+        <div class="artist-card">
+          <img
+            src="https://static.wixstatic.com/media/85f823_57242a30466a42a6956c87564622e0b8~mv2_d_3628_3628_s_4_2.jpg/v1/fill/w_3426,h_2068,al_t,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/85f823_57242a30466a42a6956c87564622e0b8~mv2_d_3628_3628_s_4_2.jpg"
+            alt="CoAnn"
+          />
+          <div class="artist-info">
+            <h3>CoAnn</h3>
+            <p>
+              A Berklee graduate, CoAnn seamlessly blends rock, jazz, and contemporary elements
+              to create her genre-fusing sound. A singer, songwriter, producer, and wellness advocate,
+              she weaves creativity and healing together through her brand, Dragonfly Holistics.
+              Her EP <em>CoAnn</em> and music videos <em>Paralyzed</em> and <em>Worlds Apart</em>
+              highlight her evolving artistry as she crafts her first full-length album.
+            </p>
+            <a href="https://www.coannmusic.com/" target="_blank">Visit Her Page</a>
+          </div>
+        </div>
+
+        <!-- Dean Johanesen -->
+        <div class="artist-card">
+          <img
+            src="https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/642744/82c04431ec90c57a680e7abe7711c3be41034870/original/dean-with-maton-latest-picture.jpg/!!/b%3AW1sicmVzaXplIiwzMjAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+            alt="Dean Johanesen"
+          />
+          <div class="artist-info">
+            <h3>Dean Johanesen</h3>
+            <p>
+              Inspired by speakeasy-era jazz, Western swing, and roots music, Dean merges history
+              and Americana into his captivating storytelling. From Long Island to Ellenton, FL,
+              he’s transporting listeners to another time. His latest album, <em>Cautionary Tales</em>,
+              showcases his masterful songwriting and is available on all streaming platforms.
+            </p>
+            <a href="https://deanjohanesen.com/" target="_blank">Visit His Page</a>
+          </div>
+        </div>
+
+        <!-- Corey Hall -->
+        <div class="artist-card">
+          <img
+            src="https://img1.wsimg.com/isteam/ip/7dc78c38-eac0-4a4b-a5cf-5ddb282de14d/IMG_3195.JPG/:/rs=w:3070,m"
+            alt="Corey Hall"
+          />
+          <div class="artist-info">
+            <h3>Corey Hall</h3>
+            <p>
+              A torchbearer of American folk, Corey bridges past and present with his soulful
+              voice and intricate guitar work. Equally adept at reviving old-time classics
+              and penning original tunes, he brings authenticity and raw emotion wherever he performs.
+            </p>
+            <a href="https://coreyhallmusic.com/home" target="_blank">Visit His Page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="join" id="join">
+      <h2>Join the Movement</h2>
+      <p>B4Famous is more than a collective—it's a movement to support independent artists before the world catches on.</p>
+      <a href="#" class="join-btn">Follow Us on ImagineBC</a>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>For booking inquiries or collaborations, reach out at <a href="mailto:info@b4famous.com">info@b4famous.com</a></p>
+      <p>Or connect with us on social media:</p>
+      <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-spotify"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 B4Famous. All rights reserved. | Powered by <a href="#" target="_blank">ImagineBC</a></p>
+  </footer>
+</body>
+</html>
